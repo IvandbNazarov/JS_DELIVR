@@ -1,22 +1,27 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" data-app>
+    <app-search-value></app-search-value>
+    <app-package-data></app-package-data>
+    <div class="footer">
+      <div class="info"></div>
+      <div class="photo"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import searchValue from "../src/components/searchValue.vue";
+import packageData from "../src/components/packageData.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    appPackageData: packageData,
+    appSearchValue: searchValue,
+  },
+};
 </script>
 
-<style lang="scss">
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,5 +29,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin: 60px auto;
+  width: 400px;
 }
 </style>
