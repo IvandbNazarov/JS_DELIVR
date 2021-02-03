@@ -27,8 +27,7 @@ export default {
   methods: {
     ...mapActions(["getPackages", "getVersions"]),
     openWindow(event) {
-	  console.log(event);
-	  this.getVersions(event)
+	  this.getVersions(event);
 	  }
   },
   computed: {

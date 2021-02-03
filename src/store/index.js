@@ -8,8 +8,7 @@ import VueAxios from 'vue-axios'
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 
-export default new Vuex.Store({
-	state: {
+export default new Vuex.Store({	state: {
 		lists: [],
 		headers: [
 			{
@@ -21,6 +20,17 @@ export default new Vuex.Store({
 				text: 'Type',
 				value: 'type'
 			}],
+		headVersions: [
+			{
+				text: 'File Name',
+				align: 'start',
+				value: 'name'
+			},
+			{
+				text: "Size",
+				value: 'size'
+			}
+		],
 		itemsPerPage: 10,
 		filteredLists: [],
 		isOpen: false,
@@ -29,12 +39,13 @@ export default new Vuex.Store({
 		extendedInfo: []
 	},
 	getters: {
+		headVersions: (state) => state.headVersions,
 		itemsPerPage: (state) => state.itemsPerPage,
 		headers: (state) => state.headers,
 		allPackages: (state) => state.filteredLists,
 		isOpen: (state) => state.isOpen,
 		versions: (state) => state.versions,
-		versionInfo: (state) => state.versionInfo
+		extendedInfo: (state) => state.extendedInfo
 	},
 	mutations: {
 		FILTER_LIST: (state, payload) => {
@@ -84,9 +95,11 @@ export default new Vuex.Store({
 			axios
 				.get(`${url}/package/${this.state.currentItem.type}/${this.state.currentItem.name}@${selectedVersion}`)
 				.then((response) => {
-					debugger
-					commit('SET_EXTENDED_INFO', { extendedInfo: response.data })
+					commit('SET_EXTENDED_INFO', { extendedInfo: response.data.files })
 				})
+		},
+		deleteExtendedInfo({ commit }) {
+			commit('SET_EXTENDED_INFO', { extendedInfo: [] })
 		}
 	}
 })
